@@ -1,0 +1,10 @@
+
+from ubuntu:20.04
+RUN apt update --fix-missing
+RUN apt install openjdk-11-jdk -y
+RUN apt install maven -y
+ADD jenkins_file.sh /
+RUN bash -c "/jenkins_file.sh"
+RUN apt-get update
+RUN apt-get install jenkins -y
+CMD service jenkins start > /dev/null 2>&1 && tail -f /dev/null

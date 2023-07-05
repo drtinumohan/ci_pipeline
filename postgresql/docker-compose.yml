@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  db:
+    image: ankane/pgvector
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: aiml
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - common_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: tinumohan2022@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    networks:
+      - common_network
+volumes:
+  db_data:
+
+networks:
+  common_network:
